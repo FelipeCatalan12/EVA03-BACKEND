@@ -1,0 +1,21 @@
+ {% extends "base.html" %}
+
+ {% block titulo %} Pagina de inicio {% endblock %}
+
+ {% block contenido %}
+
+ <h1> Pagina de inicio </h1>
+
+ <p> Bienvenido a la página de inicio de la aplicacion </p>
+ 
+ {% if user.is_authenticated %}
+
+    <h3> Hola {{user.username}} </h3>
+
+ {% else %}
+ 
+    <h3> Tu no estas logeado <a href="{% url 'login' %}">Login</a> </h3>
+
+ {% endif %}  
+
+ {% endblock %}   
