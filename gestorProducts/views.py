@@ -28,13 +28,15 @@ def agregarProductos(request):
 
     if request.method == 'POST':
         formProductos = ProductoForm(request.POST)
-        if formProductos.is_valid():
-            print("El formulario es valido")
-            formProductos.save()
-            return HttpResponseRedirect(reverse("listarProductos"))
-
+    if formProductos.is_valid():
+        print("Guardando el formulario...")
+        formProductos.save()
+        return HttpResponseRedirect(reverse("listarProductos"))
+    else:
+        print(formProductos.errors)
+        
     data = {'formProductos': formProductos,
-            'titulo': 'Agregar Paciente'
+            'titulo': 'Agregar Productos'
             }
     return render(request, 'menus/crudProductos/agregarProductos.html',data)
 

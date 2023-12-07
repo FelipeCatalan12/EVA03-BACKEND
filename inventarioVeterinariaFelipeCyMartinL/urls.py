@@ -17,12 +17,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from gestorUser.views import index, vistaAdmin
+from gestorProducts.views import listarProductos, agregarProductos, actualizarProductos, eliminarProductos
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',index),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('vistaAdmin/', vistaAdmin, name='vistaAdmin')
+    path('vistaAdmin/', vistaAdmin, name='vistaAdmin'),
+    path("listarProductos", listarProductos, name='listarProductos'),
+    path("agregarProductos", agregarProductos, name='agregarProductos'),
+    path("actualizar/<int:id>", actualizarProductos, name='actualizarProductos'),
+    path("eliminar/<int:id>", eliminarProductos, name='eliminarProductos'),
 ]
 
 

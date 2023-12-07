@@ -25,39 +25,19 @@
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    {% if productos %}
-                        <table class="table" id="miTabla">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nombre</th>
-                                    <th>Descripción</th>
-                                    <th>Precio</th>
-                                    <!-- Otros campos según tu modelo -->
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for producto in productos %}
-                                    <tr>
-                                        <td>{{ producto.id }}</td>
-                                        <td>{{ producto.nombre_producto }}</td>
-                                        <td>{{ producto.descripcion_producto }}</td>
-                                        <td>{{ producto.precio }}</td>
-                                        <!-- Otros campos según tu modelo -->
-                                        <td>
-                                            <!-- Agrega aquí tus acciones como editar y eliminar -->
-                                            <a href="/actualizarProducto/{{ producto.id }}" class="btn btn-outline-warning"><i class="bi bi-pencil-square"></i></a>
-                                            <a href="/eliminarProducto/{{ producto.id }}" class="btn btn-danger"><i class="bi bi-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    {% else %}
-                        <h1>No existen productos en la base de datos todavía</h1>
-                    {% endif %}
+                    {% block name %}
+                        <form method="post" action="{% url 'agregarProductos' %}"class="mt-4 mb-4"> <!-- Añade margen superior e inferior al formulario -->
+                            {% csrf_token %}
+                            <fieldset>
+                                <legend>{{ titulo }}</legend>
+                                {{ formProductos.as_p }}
+                            </fieldset>
+                            <button type="submit" value="{{titulo}}" class="btn btn-primary">{{titulo}}</button>
+                        </form>
+                    {% endblock %}
                 </div>
+                <!-- End of Main Content -->
+            </div>
         </div>
 
             <!-- Footer -->
@@ -100,9 +80,5 @@
             </div>
         </div>
     </div>
-
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
-  
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
 
 {% endblock content %}

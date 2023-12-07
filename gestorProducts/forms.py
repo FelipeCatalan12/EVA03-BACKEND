@@ -3,7 +3,7 @@ from .models import Categoria, Productos
 
 
 #Actualizar el dato
-class CategoriaForm(forms.form):
+class CategoriaForm(forms.Form):
     class Meta:
         model = Categoria
         fields = ['nombre_categoria']
