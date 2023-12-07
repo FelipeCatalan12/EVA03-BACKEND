@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from gestorUser.views import *
-from gestorProducts.views import listarProductos, agregarProductos, actualizarProductos, eliminarProductos
+from gestorProducts.views import listarProductos, agregarProductos, actualizarProducto, eliminarProducto
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,8 +28,8 @@ urlpatterns = [
     path('vistaAdmin/', vistaAdmin, name='vistaAdmin'),
     path("listarProductos", listarProductos, name='listarProductos'),
     path("agregarProductos", agregarProductos, name='agregarProductos'),
-    path("actualizar/<int:id>", actualizarProductos, name='actualizarProductos'),
-    path("eliminar/<int:id>", eliminarProductos, name='eliminarProductos'),
+    path("actualizarProducto/<int:id>", actualizarProducto, name='actualizarProducto'),
+    path("eliminar/<int:id>", eliminarProducto, name='eliminarProductos'),
 ]
 
 

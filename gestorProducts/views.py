@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Productos, Categoria
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -41,23 +41,20 @@ def agregarProductos(request):
     return render(request, 'menus/crudProductos/agregarProductos.html',data)
 
 
-def actualizarProductos(request, id):
-    producto = Productos.objects.get(id=id)
-    formProductos = ProductoForm(instance=producto)
+def actualizarProducto(request, id):
+    producto = get_object_or_404(Productos, id=id)
 
     if request.method == 'POST':
-        formProductos = ProductoForm(request.POST, instance=producto)
-        if formProductos.is_valid():
-            formProductos.save()
+        form = ProductoForm(request.POST, instance=producto)
+        if form.is_valid():
+            form.save()
             return HttpResponseRedirect(reverse("listarProductos"))
-    data = {
-        'title': 'Editar Productos',
-    }
-    return render(request, 'menus/crudProductos/agregarProductos.html', data)
+    else:
+        form = ProductoForm(instance=producto)
 
-def eliminarProductos(request, id):
+    return render(request, 'menus/crudProductos/actualizarProducto.html', {'form': form, 'producto': producto})
 
-    productos = Productos.objects.get(id=id)
-    productos.delete()
-
+def eliminarProducto(request, id):
+    producto = get_object_or_404(Productos, id=id)
+    producto.delete()
     return HttpResponseRedirect(reverse("listarProductos"))
