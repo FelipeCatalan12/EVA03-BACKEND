@@ -1,5 +1,8 @@
 from django.shortcuts import render
-
+from .models import Productos, Categoria
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from .forms import ProductoForm
 # Create your views here.
 
 
@@ -9,27 +12,50 @@ def panel(request):
     }
     return render(request, 'homeAdmin.html', data)
 
-"""def listarProductos(request):
+def listarProductos(request):
+
+    productos = Productos.objects.all()
+
     data = {
         'title': 'Listar Productos',
+        'productos': productos,
     }
-    return render(request, '/panel/crud/listarProductos.html', data)
+    return render(request, 'menus/crudProductos/listarProductos.html', data)
 
 
-def ingresarProductos(request):
-    data = {
-        'title': 'Ingresar Productos',
-    }
-    return render(request, 'panel/crud/ingresarProductos.html', data)
+def agregarProductos(request):
+    formProductos = ProductoForm()
 
-def editarProductos(request):
+    if request.method == 'POST':
+        formProductos = ProductoForm(request.POST)
+        if formProductos.is_valid():
+            print("El formulario es valido")
+            formProductos.save()
+            return HttpResponseRedirect(reverse("listarProductos"))
+
+    data = {'formProductos': formProductos,
+            'titulo': 'Agregar Paciente'
+            }
+    return render(request, 'menus/crudProductos/agregarProductos.html',data)
+
+
+def actualizarProductos(request, id):
+    producto = Productos.objects.get(id=id)
+    formProductos = ProductoForm(instance=producto)
+
+    if request.method == 'POST':
+        formProductos = ProductoForm(request.POST, instance=producto)
+        if formProductos.is_valid():
+            formProductos.save()
+            return HttpResponseRedirect(reverse("listarProductos"))
     data = {
         'title': 'Editar Productos',
     }
-    return render(request, 'panel/crud/editarProductos.html', data)
+    return render(request, 'menus/crudProductos/agregarProductos.html', data)
 
-def eliminarProductos(request):
-    data = {
-        'title': 'Eliminar Productos',
-    }
-    return render(request, 'panel/crud/eliminarProductos.html', data)"""
+def eliminarProductos(request, id):
+
+    productos = Productos.objects.get(id=id)
+    productos.delete()
+
+    return HttpResponseRedirect(reverse("listarProductos"))
