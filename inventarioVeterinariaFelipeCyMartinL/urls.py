@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',index),
     path('users/',viewUsers, name='viewUsers'),
-    path('addUsers/',createUser, name='createUser'),
+    path('signup/',signUp, name='SignUp'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('vistaAdmin/', vistaAdmin, name='vistaAdmin'),
     path("listarProductos", listarProductos, name='listarProductos'),

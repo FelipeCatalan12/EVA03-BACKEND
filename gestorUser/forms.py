@@ -1,25 +1,19 @@
 from django import forms
-from .models import userProfile
-from django.core import validators
+from .models import Usuario
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.models import User
+from .models import Usuario
 
-class usuarioForm(forms.ModelForm):
-    user = forms.CharField(max_length=55,
-                validators=[
-                    validators.MinLengthValidator(2),
-                    validators.MaxLengthValidator(15)
-                ]
-    ) 
-
-    info = forms.CharField(max_length=55,
-                validators=[
-                    validators.MinLengthValidator(2),
-                    validators.MaxLengthValidator(15)
-                ]
-    )
-
-    user.widget.attrs['class'] = 'form-control'
-    info.widget.attrs['class'] = 'form-control'
+class SignUpForm(UserCreationForm):
+    first_name = forms.CharField(max_length=140, required=True)
+    last_name = forms.CharField(max_length=140, required=False)
+    email = forms.EmailField(required=True)
 
     class Meta:
-        model = userProfile
-        fields = '__all__'    
+        model = User
+        fields = ('username',
+                  'first_name',
+                  'last_name',
+                  'email',
+                  'password1',
+                  'password2')
