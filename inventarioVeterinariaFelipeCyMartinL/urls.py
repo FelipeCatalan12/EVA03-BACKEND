@@ -16,11 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from gestorUser.views import index, vistaAdmin
+from gestorUser.views import index, vistaAdmin, createUser, viewUsers
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',index),
+    path('users/',viewUsers, name='viewUsers'),
+    path('addUsers/',createUser, name='createUser'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('vistaAdmin/', vistaAdmin, name='vistaAdmin')
 ]
