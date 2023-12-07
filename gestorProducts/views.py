@@ -7,9 +7,9 @@ def panel(request):
     data = {
         'title': 'Panel de Administración',
     }
-    return render(request, 'panel/index.html', data)
+    return render(request, 'homeAdmin.html', data)
 
-def listarProductos(request):
+"""def listarProductos(request):
     data = {
         'title': 'Listar Productos',
     }
@@ -32,4 +32,4 @@ def eliminarProductos(request):
     data = {
         'title': 'Eliminar Productos',
     }
-    return render(request, 'panel/crud/eliminarProductos.html', data)
+    return render(request, 'panel/crud/eliminarProductos.html', data)"""
