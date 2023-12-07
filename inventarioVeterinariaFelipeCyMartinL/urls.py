@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from gestorUser.views import *
-from gestorProducts.views import listarProductos, agregarProductos, actualizarProducto, eliminarProducto
+from gestorProducts.views import listarProductos, agregarProductos, actualizarProducto, eliminarProducto, agregarCategoria
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,6 +30,7 @@ urlpatterns = [
     path("agregarProductos", agregarProductos, name='agregarProductos'),
     path("actualizarProducto/<int:id>", actualizarProducto, name='actualizarProducto'),
     path("eliminar/<int:id>", eliminarProducto, name='eliminarProductos'),
+    path("agregarCategoria/", agregarCategoria, name='agregarCategoria'),
 ]
 
 

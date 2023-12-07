@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Productos, Categoria
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .forms import ProductoForm
+from .forms import ProductoForm, CategoriaForm
 # Create your views here.
 
 
@@ -58,3 +58,19 @@ def eliminarProducto(request, id):
     producto = get_object_or_404(Productos, id=id)
     producto.delete()
     return HttpResponseRedirect(reverse("listarProductos"))
+
+
+def agregarCategoria(request):
+    if request.method == 'POST':
+        formCategoria = CategoriaForm(request.POST)
+        if formCategoria.is_valid():
+            print("Guardando el formulario...")
+            formCategoria.save()
+            return HttpResponseRedirect(reverse("listarProductos"))
+        else:
+            print(formCategoria.errors)
+    else:
+        formCategoria = CategoriaForm()
+
+    data = {'formCategoria': formCategoria, 'titulo': 'Agregar Categoria'}
+    return render(request, 'menus/crudProductos/agregarCategoria.html', data)
