@@ -1,8 +1,12 @@
 
 from django.urls import path, include
-from gestorProducts.views import panel
+from .views import *
 
 
 urlpatterns = [
-    path('panel/', panel, name='panel'),
+
+    path("listarProductos", listarProductos, name='listarProductos'),
+    path("agregarProductos", agregarProductos, name='agregarProductos'),
+    path("actualizarProducto/<int:id>", actualizarProductos, name='actualizarProductos'),
+    path("eliminarProducto/<int:id>", eliminarProductos, name='eliminarProductos'),
 ]
