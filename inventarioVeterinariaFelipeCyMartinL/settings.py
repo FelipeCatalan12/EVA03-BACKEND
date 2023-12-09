@@ -143,6 +143,3 @@ LOGIN_URL = "/accounts/login/"
 
 """Pagina Logout"""
 LOGOUT_URL = "/accounts/logout/"
-
-"""pagina error Login"""
-LOGIN_URL = "/cuentas/login-error/"

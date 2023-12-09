@@ -25,25 +25,30 @@
 
 
 
-        {% if users %}
+        {% if usuarios %}
 
         <table class="table" id="miTabla">
 
             <thead>
                 <tr>
-                    <th>User</th>
-                    <th>Info</th>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Email</th>
                 </tr>
             </thead>
 
             <tbody>
 
 
-                {% for Users in users %}
+                {% for usuario in usuarios %}
                 <tr>
-                    <td>{{userProfile.user}}</td>
-                    <td>{{userProfile.info}}</td>
-                    </td>
+                <td>{{usuario.id}}</td>
+                <td>{{usuario.usuario.username}}</td>
+                <td>{{usuario.usuario.first_name}}</td>
+                <td>{{usuario.usuario.last_name}}</td>
+                <td>{{usuario.usuario.email}}</td>
                 </tr>
 
                 {%endfor%}
@@ -57,8 +62,8 @@
         <h1>No existen usuarios en la DB</h1>
         {% endif %}
 
-        <a href="{% url 'createUser' %}" class="btn btn-primary mt-5">Añadir usuario(s)</a>
-        <a href="{% url 'index' %}" class="btn btn-danger mt-5">Volver a inicio</a>
+        <a href="{% url 'SignUp' %}" class="btn btn-primary mt-5">Añadir usuario(s)</a>
+        <a href="{% url 'vistaAdmin' %}" class="btn btn-danger mt-5">Volver a panel</a>
 
 
 

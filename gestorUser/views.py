@@ -24,20 +24,19 @@ def vistaAdmin(request):
         return render(request, 'homeUser.html')
     
 def signUp(request):
-    usuario = Usuario
     form = SignUpForm
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('vistaAdmin')
 
-    return render(request, 'inventarioVeterinariaFelipeCyMartinL/createUser.html', {'form': form})        
+    return render(request, 'createUser.html', {'form': form})        
     
 
 def viewUsers(request):
-    users = User.objects.all()
+    users = Usuario.objects.all()
     data = {
-        'Usuarios': users
+        'usuarios': users
     }
     return render(request, 'users.html', data)    

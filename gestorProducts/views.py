@@ -22,6 +22,16 @@ def listarProductos(request):
     }
     return render(request, 'menus/crudProductos/listarProductos.html', data)
 
+def listarProductosUser(request):
+
+    productos = Productos.objects.all()
+
+    data = {
+        'title': 'Listar Productos',
+        'productos': productos,
+    }
+    return render(request, 'menus/crudProductos/listarProductosUser.html', data)
+
 
 def agregarProductos(request):
     formProductos = ProductoForm()
@@ -66,7 +76,7 @@ def agregarCategoria(request):
         if formCategoria.is_valid():
             print("Guardando el formulario...")
             formCategoria.save()
-            return HttpResponseRedirect(reverse("listarProductos"))
+            return HttpResponseRedirect(reverse("listarCategoria"))
         else:
             print(formCategoria.errors)
     else:
@@ -74,3 +84,28 @@ def agregarCategoria(request):
 
     data = {'formCategoria': formCategoria, 'titulo': 'Agregar Categoria'}
     return render(request, 'menus/crudProductos/agregarCategoria.html', data)
+
+def listarCategoria(request):
+    categoria = Categoria.objects.all()
+    data = {
+        'categorias': categoria
+    }
+    return render(request, 'menus/crudProductos/listarCategoria.html', data)
+
+def actualizarCategoria(request, id):
+    categoria = get_object_or_404(Categoria, id=id)
+
+    if request.method == 'POST':
+        form = CategoriaForm(request.POST, instance=categoria)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse("listarCategoria"))
+    else:
+        form = CategoriaForm(instance=categoria)
+
+    return render(request, 'menus/crudProductos/actualizarCategoria.html', {'form': form, 'categoria': categoria})
+
+def eliminarCategoria(request, id):
+    categoria = get_object_or_404(Categoria, id=id)
+    categoria.delete()
+    return HttpResponseRedirect(reverse("listarCategoria"))    
